@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div role="main" id="app">
+    <div role="main" id="app" class="clearfix">
         <main-app />
     </div>
     <script src="{{ url('js/app.js') }}"></script>

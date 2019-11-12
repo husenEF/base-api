@@ -1,7 +1,11 @@
 <template>
-  <div class="clearfix">
-    <h1>Home</h1>
-    <p>{{welcome}}</p>
+  <div class="row">
+    <div class="card">
+      <div class="card-header">Home</div>
+      <div class="card-body">
+        <p>{{welcome}}</p>
+      </div>
+    </div>
   </div>
 </template>
 
