@@ -1,5 +1,6 @@
 <?php
 
+use \Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,10 +12,13 @@
 |
 */
 
+$router->get('/login', function (Request $request) {
+    $token = app('auth')->attempt($request->only('email', 'password'));
+    dd($token);
+    // return response()->json(compact('token'));
+});
+
 $router->get('/', function () use ($router) {
     // return $router->app->version();
     return view('index');
-});
-$router->get('/version',function()use($router){
-    return $router->app->version();
 });
