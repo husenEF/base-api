@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -88,5 +89,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getList()
+    {
+        $user = User::paginate();
+        return response()->json($user, 200);
     }
 }
