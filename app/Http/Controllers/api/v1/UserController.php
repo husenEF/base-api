@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Transformers\UserTransformer;
 
 
 class UserController extends Controller
@@ -94,6 +95,9 @@ class UserController extends Controller
     public function getList()
     {
         $user = User::paginate();
-        return response()->json($user, 200);
+        // return response()->json($user, 200);
+        $data = app('fractal')->collection($user, new UserTransformer())->getArray();
+        // dd($data);
+        return response()->json(['code' => 200, 'message' => 'succes get data', 'data' => $data], 200);
     }
 }

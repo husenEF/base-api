@@ -81,7 +81,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 // vendor
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-// $app->register(Gergonzalez\Fractal\FractalServiceProvider::class);
+$app->register(Gergonzalez\Fractal\FractalServiceProvider::class);
 // $app->register(Gergonzalez\Fractal\FractalServiceProvider::class);
 
 
