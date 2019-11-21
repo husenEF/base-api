@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Transformers\UserTransformer;
 
 
 class UserController extends Controller
@@ -16,8 +18,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $user = app('fractal')->item($user, new UserTransformer())->getArray();
         $response = [
-            'data' => Auth::user(),
+            'data' => $user,
             'message' => 'success get data',
             'code' => 200
         ];
@@ -88,5 +92,14 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getList()
+    {
+        $user = User::paginate();
+        // return response()->json($user, 200);
+        $data = app('fractal')->collection($user, new UserTransformer())->getArray();
+        // dd($data);
+        return response()->json(['code' => 200, 'message' => 'succes get data', 'data' => $data], 200);
     }
 }

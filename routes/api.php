@@ -14,6 +14,7 @@ $router->group(['namespace' => 'v1', 'prefix' => '/v1'], function ($router) {
         $router->post('login', 'AuthController@login');
         $router->group(['middleware' => 'auth:api'], function ($router) {
             $router->get('/myprofile', 'UserController@index');
+            $router->get('/userlist', 'UserController@getList');
         });
     });
 });
