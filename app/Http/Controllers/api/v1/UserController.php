@@ -18,8 +18,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $user = app('fractal')->item($user, new UserTransformer())->getArray();
         $response = [
-            'data' => Auth::user(),
+            'data' => $user,
             'message' => 'success get data',
             'code' => 200
         ];
