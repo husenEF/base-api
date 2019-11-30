@@ -1,26 +1,21 @@
-import { setAuthorization } from "./general";
-
-export function login(credentials) {
-
+export function login(credetial) {
     return new Promise((res, rej) => {
-        axios.post('/api/v1/login', credentials)
-            .then((response) => {
-                setAuthorization(response.data.access_token)
-                res(response.data);
+        axios
+            .post("api/v1/auth/login", credetial)
+            .then(response => {
+                res(response);
             })
-            .catch((err) => {
-                console.log("error login", err)
-                rej("Email atau password Anda salah!")
-            })
-    })
+            .catch(err => {
+                rej("wrong email or password");
+            });
+    });
 }
 
 export function getLocalUser() {
-    const userStr = localStorage.getItem("user")
+    const userStr = localStorage.getItem("user");
 
     if (!userStr) {
-        return null
+        return null;
     }
-
-    return JSON.parse(userStr)
+    return JSON.parse(userStr);
 }
