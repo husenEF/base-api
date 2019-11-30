@@ -1,7 +1,8 @@
 
 export default {
     state: {
-        welcomeMessage: "Welcome to my vue App"
+        welcomeMessage: "Welcome to my vue App",
+        isLoggedIn: !!localStorage.getItem('token')
     },
     getters: {
         welcome(state) {
