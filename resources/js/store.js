@@ -1,3 +1,5 @@
+import { getToken, getExpired, setCredential, removeAuthCredential } from './src/helpers/utils'
+
 export default {
     state: {
         welcomeMessage: "Welcome to my vue App",
@@ -36,17 +38,17 @@ export default {
             return new Promise((resolve, reject) => {
                 axios.post('/api/v1/auth/login', { email: user.username, password: user.pass })
                     .then(response => {
-                        const { data: { data: { token, expires, user } } } = response
+                        const { data: { data: { token, expires_in, user,token_type } } } = response
                         commit('auth_success', token, user)
-                        localStorage.setItem('token', token)
-                        localStorage.setItem('user', user)
-                        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+                        // console.log("data",response)
+                        setCredential(token, expires_in)
+                        axios.defaults.headers.common['Authorization'] = `${token_type} ${token}`
+                        
                         resolve(response)
                     })
                     .catch(err => {
                         const { response: { data: { message } } } = err
                         commit('auth_error', message)
-                        localStorage.removeItem('token')
                         reject(err)
                     })
             })
