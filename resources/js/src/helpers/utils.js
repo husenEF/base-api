@@ -1,6 +1,8 @@
 import VueCookie from 'vue-cookie'
 
 // TOKEN CREDENTIAL
+
+console.log('process.env.NODE_ENV')
 const tokenKey = `${process.env.NODE_ENV}_admin_access_token`
 const expiredTokenKey = `${process.env.NODE_ENV}_admin_expired_token`
 export const getToken = () => VueCookie.get(tokenKey) || ''
@@ -13,6 +15,7 @@ export const setCredential = (token, expired) => {
     console.log([token, expired])
 }
 export const removeAuthCredential = () => {
+    console.log('a')
     VueCookie.delete(tokenKey)
     VueCookie.delete(expiredTokenKey)
 }

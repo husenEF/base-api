@@ -6,9 +6,7 @@ export function initialize(store, router) {
         const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
         const isLogin = store.state.isLogin || (getToken() !== '')
         const currentUser = store.state.user
-        store.commit('auth_success', getToken(), {})
-        console.log("isLogin", isLogin)
-        // console.log("to", to)
+  
         document.title = to.meta.title + " | Base Api"
         // console.log("meta", [to.meta, currentUser])
 
@@ -16,6 +14,7 @@ export function initialize(store, router) {
             next('/login')
             // alert()
         } else if (to.path == '/login' && isLogin) {
+            store.commit('auth_success', getToken(), {})
             next('/')
         } else {
             next()

@@ -19,6 +19,7 @@ export default {
             return state.errorMessage[index]
         },
         isLoggedIn: state => {
+            console.log('state',state)
             return state.isLoggedIn
         }
     },
@@ -73,6 +74,7 @@ export default {
             })
         },
         logoutAction: ({ commit }) => {
+            console.log("logoutAction")
             commit('removeCredential')
             removeAuthCredential()
 
