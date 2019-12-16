@@ -43,8 +43,11 @@
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="!isUserLogin">
           <router-link to="/login" class="nav-link" exact>Login</router-link>
+        </li>
+        <li class="nav-item" v-if="isUserLogin">
+          <a href="#" class="nav-linkg" v-on:click="handleLogout">Logout</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -54,3 +57,18 @@
     </div>
   </nav>
 </template>
+<script>
+export default {
+  name: "header",
+  computed: {
+    isUserLogin() {
+      return this.$store.getters.isLoggedIn;
+    }
+  },
+  methods: {
+    handleLogout() {
+      this.$store.dispatch("logoutAction");
+    }
+  }
+};
+</script>

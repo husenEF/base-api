@@ -4,6 +4,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Vuex from "vuex";
 import VueCookie from 'vue-cookie'
+import { initialize } from './src/helpers/permison'
 
 import { routes } from "./routes";
 import StoreData from "./store";
@@ -19,6 +20,8 @@ const router = new VueRouter({
     routes,
     mode: "hash"
 });
+
+initialize(store, router)
 
 const app = new Vue({
     el: "#app",

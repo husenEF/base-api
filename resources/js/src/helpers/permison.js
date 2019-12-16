@@ -1,19 +1,21 @@
+import { getToken } from './utils'
+
 export function initialize(store, router) {
+    console.log("initialize", getToken(), store.state)
     router.beforeEach((to, from, next) => {
         const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-        const currentUser = store.state.currentUser
-
+        const isLogin = store.state.isLogin || (getToken() !== '')
+        const currentUser = store.state.user
+        store.commit('auth_success', getToken(), {})
+        console.log("isLogin", isLogin)
         // console.log("to", to)
-        document.title = to.meta.title + " | Management Ban"
+        document.title = to.meta.title + " | Base Api"
         // console.log("meta", [to.meta, currentUser])
 
-        if (requiresAuth && !currentUser) {
+        if (requiresAuth && !isLogin) {
             next('/login')
             // alert()
-        } else if (to.path == '/login' && currentUser) {
-            next('/')
-        } else if (currentUser && currentUser.roles == 'mekanik' && to.meta.roles == 'admin') {
-            alert("Anda tidak diperkenankan di halaman ini")
+        } else if (to.path == '/login' && isLogin) {
             next('/')
         } else {
             next()
