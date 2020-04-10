@@ -1,3 +1,4 @@
+
 # Lumen PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
@@ -11,6 +12,24 @@ Laravel Lumen is a stunningly fast PHP micro-framework for building web applicat
 ## Official Documentation
 
 Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+
+## PREPARE INSTALL
+* `cp .env.example .env` and setup the Database
+* run `composer install && yarn install`
+* run `php artisan migrate` && `php artisan db:seed`
+* `sudo chmod 777 -R storage/app storage/framework storage/logs`
+* `php artisan jwt:secret` to generate token 
+  
+## Tes User
+* check Your Database, get some user emal and default password `123456`
+* open postmane App and try post to url `/api/v1/auth/login` with header 
+```Content-Type:application/json```
+and body 
+``` {
+    "email": "kleannon@gmail.com",
+    "password": "123456"
+} ```
+
 
 ## Security Vulnerabilities
 
